@@ -11,7 +11,6 @@ import {
 } from '@pages';
 import '../../index.css';
 import styles from './app.module.css';
-
 import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
 import {
   Navigate,
@@ -20,7 +19,10 @@ import {
   useLocation,
   useNavigate
 } from 'react-router-dom';
-import { useSelector } from '../../services/store';
+import { useSelector, useDispatch } from '../../services/store';
+import { useEffect } from 'react';
+import { fetchIngridients } from '../../services/slices/ingridientsSlice';
+import { resetOrderModalData } from '../../services/slices/ordersSlice';
 
 const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
@@ -34,7 +36,14 @@ const App = () => {
 
   const handleClose = () => {
     navigate(-1);
+    dispatch(resetOrderModalData());
   };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchIngridients());
+  }, [dispatch]);
 
   return (
     <div className={styles.app}>
@@ -54,6 +63,9 @@ const App = () => {
           path='profile/orders'
           element={<ProtectedRoute element={<ProfileOrders />} />}
         />
+        <Route path='/feed/:number' element={<OrderInfo />} />
+        <Route path='/ingredients/:id' element={<IngredientDetails />} />
+        <Route path='/profile/orders/:number' element={<OrderInfo />} />
         <Route path='*' element={<NotFound404 />} />
       </Routes>
       {background && (

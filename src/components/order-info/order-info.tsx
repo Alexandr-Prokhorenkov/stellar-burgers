@@ -11,13 +11,15 @@ export const OrderInfo: FC = () => {
   const dispatch = useDispatch();
   const { number } = useParams<{ number: string }>();
   const orderData = useSelector((state) => state.orders.orderModalData);
-  useEffect(() => {
-    dispatch(fetchOrder(Number(number)));
-  });
-
   const ingredients: TIngredient[] = useSelector(
     (state) => state.ingridients.data
   );
+
+  useEffect(() => {
+    if (number) {
+      dispatch(fetchOrder(Number(number)));
+    }
+  }, [dispatch, number]);
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {

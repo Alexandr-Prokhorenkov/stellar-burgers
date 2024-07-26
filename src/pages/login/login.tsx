@@ -14,7 +14,7 @@ export const Login: FC = () => {
     e.preventDefault();
     try {
       await dispatch(loginUser({ email, password }));
-      navigate('/profile', { replace: true });
+      navigate('/', { replace: true });
     } catch (_) {}
   };
 

@@ -8,14 +8,9 @@ import { fetchIngridients } from '../../services/slices/ingridientsSlice';
 
 export const ConstructorPage: FC = () => {
   /** TODO: взять переменную из стора */
-  const dispatch = useDispatch();
   const isIngredientsLoading = useSelector(
     (state) => state.ingridients.isLoading
   );
-
-  useEffect(() => {
-    dispatch(fetchIngridients());
-  }, [dispatch]);
 
   return (
     <>

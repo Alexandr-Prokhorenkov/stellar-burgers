@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch } from '../../services/store';
 import { BurgerIngredientUI } from '@ui';
 import { TBurgerIngredientProps } from './type';
+import { addIngredientWithId } from '../../services/slices/burgerConstructorSlice';
 import {
   setBun,
   addIngridient
@@ -17,7 +18,7 @@ export const BurgerIngredient: FC<TBurgerIngredientProps> = memo(
       if (ingredient.type === 'bun') {
         dispatch(setBun(ingredient));
       } else {
-        dispatch(addIngridient(ingredient));
+        dispatch(addIngredientWithId(ingredient));
       }
     };
 
