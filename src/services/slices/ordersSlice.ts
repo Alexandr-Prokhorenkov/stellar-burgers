@@ -54,7 +54,7 @@ export const fetchOrders = createAsyncThunk(
   async () => await getOrdersApi()
 );
 
-const initialState: TOrderState = {
+export const initialState: TOrderState = {
   isOrderLoading: true,
   isOrdersLoading: true,
   orderRequest: false,
