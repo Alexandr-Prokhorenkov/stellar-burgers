@@ -19,7 +19,7 @@ export const fetchIngridients = createAsyncThunk(
         const response = await getIngredientsApi();
         return response;
       } catch (error) {
-        return rejectWithValue(error);
+        return rejectWithValue(error || 'Ошибка при запросе данных');
       }
     }
   }
@@ -27,11 +27,11 @@ export const fetchIngridients = createAsyncThunk(
 
 type TIngridientsState = {
   isLoading: boolean;
-  error: null | SerializedError;
+  error: null | string;
   data: TIngredient[];
 };
 
-const initialState: TIngridientsState = {
+export const initialState: TIngridientsState = {
   isLoading: true,
   error: null,
   data: []
@@ -54,7 +54,7 @@ const IngridientsSlice = createSlice({
       })
       .addCase(fetchIngridients.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.error;
+        state.error = (action.payload as string) || 'Ошибка сети';
       });
   }
 });

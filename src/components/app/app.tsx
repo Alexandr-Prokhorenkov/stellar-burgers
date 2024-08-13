@@ -23,6 +23,7 @@ import { useSelector, useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { fetchIngridients } from '../../services/slices/ingridientsSlice';
 import { resetOrderModalData } from '../../services/slices/ordersSlice';
+import { fetchUser } from '../../services/slices/userSlice';
 
 const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
@@ -42,6 +43,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(fetchUser());
     dispatch(fetchIngridients());
   }, [dispatch]);
 
