@@ -27,11 +27,11 @@ export const fetchIngridients = createAsyncThunk(
 
 type TIngridientsState = {
   isLoading: boolean;
-  error: null | SerializedError;
+  error: null | string;
   data: TIngredient[];
 };
 
-const initialState: TIngridientsState = {
+export const initialState: TIngridientsState = {
   isLoading: true,
   error: null,
   data: []
@@ -54,7 +54,11 @@ const IngridientsSlice = createSlice({
       })
       .addCase(fetchIngridients.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.error;
+        if (typeof action.payload === 'string') {
+          state.error = action.payload;
+        } else {
+          state.error = action.error.message || 'Ошибка сети';
+        }
       });
   }
 });
