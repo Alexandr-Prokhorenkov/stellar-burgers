@@ -11,7 +11,8 @@ import {
   updateUserApi,
   logoutApi,
   TLoginData,
-  TRegisterData
+  TRegisterData,
+  getUserApi
 } from '../../utils/burger-api';
 
 import { getCookie, setCookie, deleteCookie } from '../../utils/cookie';
@@ -91,7 +92,20 @@ export const logoutUser = createAsyncThunk<
   }
 });
 
-type TUserState = {
+export const fetchUser = createAsyncThunk(
+  'user/fetchUser',
+  async (_, { rejectWithValue }) => {
+    const response = await getUserApi();
+    console.log(response);
+    if (!response.success) {
+      return rejectWithValue(response);
+    }
+    return response.user;
+  }
+);
+
+export type TUserState = {
+  isAuthChecked: boolean;
   isAuthenticated: boolean;
   loginError?: RejectValue;
   registerError?: RejectValue;
@@ -99,6 +113,7 @@ type TUserState = {
 };
 
 export const initialState: TUserState = {
+  isAuthChecked: false,
   isAuthenticated: false,
   data: {
     name: '',
@@ -144,9 +159,16 @@ const userSlice = createSlice({
           name: ''
         };
       })
-
       .addCase(updateUser.fulfilled, (state, action: PayloadAction<TUser>) => {
         state.data = action.payload;
+      })
+      .addCase(fetchUser.fulfilled, (state, action: PayloadAction<TUser>) => {
+        state.isAuthChecked = true;
+        state.isAuthenticated = true;
+        state.data = action.payload;
+      })
+      .addCase(fetchUser.rejected, (state) => {
+        state.isAuthChecked = true;
       });
   }
 });

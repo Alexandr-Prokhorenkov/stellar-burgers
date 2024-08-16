@@ -11,7 +11,7 @@ import feedsSlice from './slices/feedsSlice';
 import ordersSlice from './slices/ordersSlice';
 import userSlice from './slices/userSlice';
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   user: userSlice,
   orders: ordersSlice,
   ingridients: ingridientsSlice,
@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
   feeds: feedsSlice
 });
 
-const store = configureStore({
+export const store = configureStore({
   reducer: rootReducer,
   devTools: process.env.NODE_ENV !== 'production'
 });
