@@ -22,6 +22,7 @@ describe('Тест конструктора бургеров', () => {
   describe('Проверка работы модальных окон', () => {
     describe('Проверка открытия модальных окон', () => {
       it('Открытие модального окна ингредиента', () => {
+        cy.get('#modals').children().should('have.length', 0);
         cy.get('[data-ingredient="bun"]:first-of-type').click();
         cy.get('#modals').children().should('have.length', 2);
       });
@@ -29,12 +30,14 @@ describe('Тест конструктора бургеров', () => {
 
     describe('Проверка закрытия модальных окон', () => {
       it('Закрытие по клику на крестик', () => {
+        cy.get('#modals').children().should('have.length', 0);
         cy.get('[data-ingredient="bun"]:first-of-type').click();
         cy.get('#modals button:first-of-type').click();
         cy.get('#modals').children().should('have.length', 0);
       });
 
       it('Закрытие по клику на оверлей', () => {
+        cy.get('#modals').children().should('have.length', 0);
         cy.get('[data-ingredient="bun"]:first-of-type').click();
         cy.get('#modals>div:nth-of-type(2)').click({ force: true });
         cy.get('#modals').children().should('have.length', 0);

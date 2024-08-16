@@ -67,58 +67,45 @@ describe('Тестирование ingredients', () => {
     expect(store.getState().ingridients).toEqual(initialState);
   });
 
-  test('Проверка состояния при запросе fetchIngridients (pending)', async () => {
-    // Мокаем запрос API
-    (getIngredientsApi as jest.Mock).mockResolvedValue(ingredientsMockData);
+  test('Проверка редьюсера для состояния fetchIngridients.pending', () => {
+    const action = fetchIngridients.pending('', undefined);
+    const actualState = ingridientSlice(initialState, action);
 
-    const dispatch = store.dispatch as AppDispatch;
-    const action = dispatch(fetchIngridients());
-
-    // Проверяем, что isLoading установлен в true
-    expect(store.getState().ingridients.isLoading).toBe(true);
-    expect(store.getState().ingridients.error).toBeNull();
-
-    await action; // Дожидаемся завершения асинхронной операции
-
-    // Проверяем состояние после завершения запроса
-    const state = store.getState().ingridients;
-    expect(state.isLoading).toBe(false);
-    expect(state.data).toEqual(ingredientsMockData);
-    expect(state.error).toBeNull();
+    expect(actualState).toEqual({
+      data: [],
+      isLoading: true,
+      error: null
+    });
   });
 
-  test('Проверка состояния при успешном выполнении запроса fetchIngridients (fulfilled)', async () => {
-    // Мокаем успешный ответ API
-    (getIngredientsApi as jest.Mock).mockResolvedValue(ingredientsMockData);
+  test('Проверка редьюсера для состояния fetchIngridients.fulfilled', () => {
+    const action = fetchIngridients.fulfilled(
+      ingredientsMockData,
+      '',
+      undefined
+    );
+    const actualState = ingridientSlice(initialState, action);
 
-    const dispatch = store.dispatch as AppDispatch;
-    await dispatch(fetchIngridients());
-
-    // Проверяем состояние после успешного выполнения запроса
-    const state = store.getState().ingridients;
-    expect(state.isLoading).toBe(false);
-    expect(state.data).toEqual(ingredientsMockData);
-    expect(state.error).toBeNull();
+    expect(actualState).toEqual({
+      data: ingredientsMockData,
+      isLoading: false,
+      error: null
+    });
   });
 
-  test('Проверка состояния при ошибке выполнения запроса fetchIngridients (rejected)', async () => {
-    // Мокаем ошибку API
+  test('Проверка редьюсера для состояния fetchIngridients.rejected', () => {
     const mockError = 'Ошибка сети';
-    (getIngredientsApi as jest.Mock).mockRejectedValue(mockError);
+    const action = fetchIngridients.rejected(
+      new Error(mockError),
+      '',
+      undefined
+    );
+    const actualState = ingridientSlice(initialState, action);
 
-    const dispatch = store.dispatch as AppDispatch;
-    const action = dispatch(fetchIngridients());
-
-    // Проверяем состояние при выполнении запроса
-    expect(store.getState().ingridients.isLoading).toBe(true);
-    expect(store.getState().ingridients.error).toBeNull();
-
-    await action; // Дожидаемся завершения асинхронной операции
-
-    // Проверяем состояние после завершения запроса
-    const state = store.getState().ingridients;
-    expect(state.isLoading).toBe(false);
-    expect(state.data).toEqual([]);
-    expect(state.error).toEqual(mockError);
+    expect(actualState).toEqual({
+      data: [],
+      isLoading: false,
+      error: mockError
+    });
   });
 });

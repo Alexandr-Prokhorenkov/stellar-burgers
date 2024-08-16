@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.45% </span>
+                <span class="strong">78.78% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>63/66</span>
+                <span class='fraction'>52/66</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">71.42% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/7</span>
+                <span class='fraction'>4/6</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.45% </span>
+                <span class="strong">78.78% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>63/66</span>
+                <span class='fraction'>52/66</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -141,19 +141,19 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -175,13 +175,11 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -189,7 +187,9 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -207,19 +207,19 @@ import {
 export const fetchIngridients = createAsyncThunk(
   'ingridients/fetchIngridients',
   async (_, { getState, rejectWithValue }) =&gt; {
-    const state = getState() as RootState;
-    const ingridientsState = state.ingridients;
-    if (ingridientsState.data.length &gt; 0<span class="branch-0 cbranch-no" title="branch not covered" >) {</span>
+<span class="cstat-no" title="statement not covered" >    const state = getState() as RootState;</span>
+<span class="cstat-no" title="statement not covered" >    const ingridientsState = state.ingridients;</span>
+<span class="cstat-no" title="statement not covered" >    if (ingridientsState.data.length &gt; 0) {</span>
 <span class="cstat-no" title="statement not covered" >      return ingridientsState.data;</span>
-    } else {
-      try {
-        const response = await getIngredientsApi();
-        return response;
-      } catch (error) {
-        return rejectWithValue(error);
-      }
-    }
-  }
+<span class="cstat-no" title="statement not covered" >    } else {</span>
+<span class="cstat-no" title="statement not covered" >      try {</span>
+<span class="cstat-no" title="statement not covered" >        const response = await getIngredientsApi();</span>
+<span class="cstat-no" title="statement not covered" >        return response;</span>
+<span class="cstat-no" title="statement not covered" >      } catch (error) {</span>
+<span class="cstat-no" title="statement not covered" >        return rejectWithValue(error);</span>
+<span class="cstat-no" title="statement not covered" >      }</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 );
 &nbsp;
 type TIngridientsState = {
@@ -251,11 +251,11 @@ const IngridientsSlice = createSlice({
       })
       .addCase(fetchIngridients.rejected, (state, action) =&gt; {
         state.isLoading = false;
-        if (typeof action.payload === 'string') {
-          state.error = action.payload;
-        }<span class="branch-0 cbranch-no" title="branch not covered" > else {</span>
-<span class="cstat-no" title="statement not covered" >          state.error = action.error.message || 'Ошибка сети';</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
+        if (typeof action.payload === 'string') <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >          state.error = action.payload;</span>
+        } else {
+          state.error = action.error.message<span class="branch-0 cbranch-no" title="branch not covered" > || 'Ошибка сети';</span>
+        }
       });
   }
 });
@@ -268,7 +268,7 @@ export default IngridientsSlice.reducer;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-08-15T16:14:58.124Z
+                at 2024-08-16T10:19:04.272Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
